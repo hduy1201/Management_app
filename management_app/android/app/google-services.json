@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "671682979243",
+    "project_id": "management-flutter-app",
+    "storage_bucket": "management-flutter-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:671682979243:android:da2068b2dbb9338f661eee",
+        "android_client_info": {
+          "package_name": "vn.com.edu.itss.management_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "671682979243-4el51fg9tlu6vngr3gq2eb0ns6lq9pl9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAmGUUucnFPvT2TpnF34-1PsRY8FR2fbY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "671682979243-4el51fg9tlu6vngr3gq2eb0ns6lq9pl9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "671682979243-eehs4t7icrtu7sihk7fjf3hme1m0k6vl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "vn.com.edu.itss.managementApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
