@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:management_app/pages/home.dart';
+import 'package:management_app/widgets/login_dialog.dart';
 
 class LoginPage extends GetWidget {
   const LoginPage({super.key});
@@ -59,14 +60,16 @@ class LoginPage extends GetWidget {
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.dialog(const LoginDialogWidget());
+                  },
                   icon: Image.asset(
-                    "assets/images/phone_icon.png",
+                    "assets/images/email_icon.png",
                   ),
                   label: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 15),
+                    margin: const EdgeInsets.symmetric(horizontal: 45),
                     child: const Text(
-                      'Sign in with phone number',
+                      'Sign in with Gmail',
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,

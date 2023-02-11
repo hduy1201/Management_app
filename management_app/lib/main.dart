@@ -6,6 +6,7 @@ import 'package:management_app/pages/home.dart';
 import 'package:management_app/pages/login.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:management_app/widgets/login_dialog.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -37,6 +38,7 @@ class MyApp extends GetWidget {
       ),
       home: LoginPage(),
       // home: HomePage(),
+      // home: LoginDialogWidget(),
     );
   }
 }
