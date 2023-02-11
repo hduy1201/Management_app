@@ -12,7 +12,7 @@ class ProfileScreen extends GetView {
         children: <Widget>[
           Positioned(
             child: SizedBox(
-              height: Get.size.height * 0.3,
+              height: Get.size.height * 0.25,
               child: Container(
                 decoration: const BoxDecoration(
                   color: Colors.blueGrey,
@@ -24,13 +24,12 @@ class ProfileScreen extends GetView {
             child: Column(
               children: [
                 SizedBox(
-                  height: Get.size.height * 0.3 - Get.size.height * 0.1,
+                  height: Get.size.height * 0.3 - Get.size.height * 0.15,
                 ),
                 Container(
                   width: Get.size.width * 0.4,
                   height: Get.size.height * 0.2,
                   decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
                     image: DecorationImage(
                       image: AssetImage(
                         "assets/images/profile.png",
@@ -41,22 +40,25 @@ class ProfileScreen extends GetView {
                 const Text(
                   "Name",
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 25,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                const Text(
-                  "Role",
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text(
+                    "Role",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ],
             ),
           ),
           Positioned(
-            bottom: 20,
+            bottom: 100,
             left: Get.size.width * 0.2,
             right: Get.size.width * 0.2,
             child: ElevatedButton.icon(
