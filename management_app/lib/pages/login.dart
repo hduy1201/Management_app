@@ -39,7 +39,7 @@ class LoginPage extends GetWidget {
                 ),
                 Image.asset("assets/images/login_1.png"),
                 ElevatedButton.icon(
-                  onPressed: () => Get.to(() => HomePage()),
+                  onPressed: () => Get.off(() => HomePage()),
                   icon: Image.asset(
                     "assets/images/google_icon.png",
                   ),
