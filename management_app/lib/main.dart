@@ -2,11 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:management_app/pages/account.dart';
 import 'package:management_app/pages/home.dart';
 import 'package:management_app/pages/login.dart';
 
 import 'package:firebase_core/firebase_core.dart';
-import 'package:management_app/widgets/login_dialog.dart';
+import 'package:management_app/pages/profile.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -36,9 +37,9 @@ class MyApp extends GetWidget {
           unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600),
         ),
       ),
-      home: LoginPage(),
+      // home: LoginPage(),
       // home: HomePage(),
-      // home: LoginDialogWidget(),
+      home: ProfileScreen(),
     );
   }
 }

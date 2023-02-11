@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:management_app/pages/setting.dart';
+import 'package:management_app/pages/profile.dart';
 
-class HomePage extends GetView {
-  HomePage({super.key});
-  var _selectedIndex = 0.obs;
+class HomeScreen extends GetView {
+  HomeScreen({super.key});
+  final _selectedIndex = 0.obs;
 
   String listIdToName(int index) {
     if (index == 0) {
       return 'Home';
     } else if (index == 1) {
-      return 'Setting';
+      return 'Profile';
     } else {
       return 'Home';
     }
@@ -32,7 +32,7 @@ class HomePage extends GetView {
               child: Text('Home Page'),
             );
           } else if (_selectedIndex.value == 1) {
-            return const SettingPage();
+            return const ProfileScreen();
           } else {
             return const Center(
               child: Text('Home Page'),
@@ -56,10 +56,10 @@ class HomePage extends GetView {
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.settings,
+                Icons.person,
                 size: 30,
               ),
-              label: 'Setting',
+              label: 'Profile',
             ),
           ],
         ),
