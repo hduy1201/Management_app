@@ -1,25 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class AddMemberDialogWidget extends GetView {
   AddMemberDialogWidget({super.key});
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController userRoleController = TextEditingController();
-  final _selectedRole = UserRoleList.admin.obs;
+  UserRoleController userRoleController = UserRoleController();
 
   @override
   Widget build(BuildContext context) {
-    final List<DropdownMenuEntry<UserRoleList>> roleEntries =
-        <DropdownMenuEntry<UserRoleList>>[];
-    for (final UserRoleList role in UserRoleList.values) {
-      roleEntries.add(DropdownMenuEntry<UserRoleList>(
-          value: role, label: role.name, enabled: role.name != 'Grey'));
-    }
     return AlertDialog(
       title: const Text('Add member to group'),
       content: Form(
           key: _formKey,
-          child: Column(mainAxisSize: MainAxisSize.max, children: [
+          child: Column(mainAxisSize: MainAxisSize.min, children: [
             TextFormField(
               decoration: const InputDecoration(
                 hintText: 'Enter member name',
@@ -32,17 +26,27 @@ class AddMemberDialogWidget extends GetView {
               },
             ),
             Obx(() {
-              return DropdownMenu<UserRoleList>(
-                menuHeight: 10,
-                initialSelection: _selectedRole.value,
-                controller: userRoleController,
-                label: const Text('Role'),
-                dropdownMenuEntries: roleEntries,
-                onSelected: (UserRoleList? role) {
-                  if (role != null) {
-                    _selectedRole.value = role;
-                  }
-                },
+              return Row(
+                children: [
+                  const Text('Role: '),
+                  DropdownButton(
+                    alignment: AlignmentDirectional.center,
+                    hint: const Text(
+                      'Book Type',
+                    ),
+                    onChanged: (newValue) {
+                      userRoleController.setSelected(newValue!);
+                    },
+                    value: userRoleController.selected.value,
+                    items: UserRoleController.list
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  )
+                ],
               );
             })
           ])),
@@ -51,7 +55,7 @@ class AddMemberDialogWidget extends GetView {
           style: TextButton.styleFrom(
             textStyle: Theme.of(context).textTheme.labelLarge,
           ),
-          child: const Text('Disable'),
+          child: const Text('Close'),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -60,7 +64,7 @@ class AddMemberDialogWidget extends GetView {
           style: TextButton.styleFrom(
             textStyle: Theme.of(context).textTheme.labelLarge,
           ),
-          child: const Text('Enable'),
+          child: const Text('Sumbit'),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -70,10 +74,15 @@ class AddMemberDialogWidget extends GetView {
   }
 }
 
-enum UserRoleList {
-  admin('Admin'),
-  member('Member');
+class UserRoleController extends GetxController {
+  // It is mandatory initialize with one value from listType
+  final selected = list[0].obs;
+  static List<String> list = <String>[
+    'Member',
+    'Admin',
+  ];
 
-  const UserRoleList(this.name);
-  final String name;
+  void setSelected(String value) {
+    selected.value = value;
+  }
 }
