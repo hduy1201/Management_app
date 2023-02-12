@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:management_app/pages/account.dart';
 import 'package:management_app/pages/home.dart';
 import 'package:management_app/pages/login.dart';
 
@@ -25,6 +24,7 @@ class MyApp extends GetWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Management App',
+
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
@@ -37,9 +37,9 @@ class MyApp extends GetWidget {
           unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600),
         ),
       ),
-      // home: LoginPage(),
+      home: LoginPage(),
       // home: HomePage(),
-      home: ProfileScreen(),
+      // home: ProfileScreen(),
     );
   }
 }
