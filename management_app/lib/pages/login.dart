@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:management_app/pages/home.dart';
 import 'package:management_app/widgets/login_dialog.dart';
 
-class LoginPage extends GetWidget {
+class LoginPage extends GetView {
   const LoginPage({super.key});
 
   @override
