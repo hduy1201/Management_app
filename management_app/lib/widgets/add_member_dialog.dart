@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 // ignore: must_be_immutable
-class AddMemberDialogWidget extends GetView {
+class AddMemberDialogWidget extends GetWidget {
   AddMemberDialogWidget({super.key});
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   UserRoleController userRoleController = UserRoleController();

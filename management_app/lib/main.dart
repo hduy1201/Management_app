@@ -7,6 +7,7 @@ import 'package:management_app/pages/login.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:management_app/pages/profile.dart';
+import 'package:management_app/size_config.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -14,6 +15,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  SizeConfig().init();
   runApp(const MyApp());
 }
 

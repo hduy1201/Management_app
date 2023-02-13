@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:management_app/pages/group.dart';
+import 'package:management_app/pages/add_task_form.dart';
+import 'package:management_app/pages/task.dart';
 
 class TaskListWidget extends GetView {
   const TaskListWidget({super.key});
@@ -23,7 +24,7 @@ class TaskListWidget extends GetView {
               Icons.add_circle,
               color: Colors.blueGrey,
             ),
-            onPressed: (() => Get.to(() => GroupPage())),
+            onPressed: (() => Get.to(() => AddTaskDialogPage())),
           ),
         ],
       ),
@@ -49,7 +50,8 @@ class TaskListWidget extends GetView {
 
   ListTile _tile(String title, String subtitle, IconData icon) {
     return ListTile(
-      onTap: (() => Get.to(() => GroupPage())),
+      onTap: (() =>
+          Get.to(() => TaskDetailPage(title: title, subtitle: subtitle))),
       title: Text(title,
           style: const TextStyle(
             fontWeight: FontWeight.w500,

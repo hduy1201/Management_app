@@ -64,9 +64,33 @@ class MemberListWidget extends GetView {
           width: 50.0,
         ),
       ),
-      trailing: const Icon(
-        Icons.more_vert,
-        color: Colors.blueGrey,
+      // click icon to show more options
+      trailing: PopupMenuButton(
+        itemBuilder: (context) => [
+          const PopupMenuItem(
+            value: 1,
+            child: Text("Kick out"),
+          ),
+        ],
+        onSelected: (value) {
+          if (value == 1) {
+            //show dialog to confirm
+            Get.dialog(AlertDialog(
+              title: const Text("Kick out?"),
+              content: const Text("Are you sure to kick out this member?"),
+              actions: [
+                TextButton(
+                  onPressed: () => Get.back(),
+                  child: const Text("Cancel"),
+                ),
+                TextButton(
+                  onPressed: () => Get.back(),
+                  child: const Text("OK"),
+                ),
+              ],
+            ));
+          }
+        },
       ),
     );
   }
