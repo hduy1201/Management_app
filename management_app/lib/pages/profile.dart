@@ -33,7 +33,7 @@ class ProfileScreen extends GetView {
                     shape: BoxShape.circle,
                     image: DecorationImage(
                       image: AssetImage(
-                        "assets/images/profile.png",
+                        "assets/images/jenie.jpg",
                       ),
                     ),
                   ),

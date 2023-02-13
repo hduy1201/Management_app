@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:management_app/controllers/task_controller.dart';
 import 'package:management_app/models/task.model.dart';
 import 'package:management_app/theme.dart';
 import 'package:management_app/widgets/button.dart';
@@ -8,6 +9,7 @@ import 'package:management_app/widgets/input_field.dart';
 
 class AddTaskDialogPage extends GetWidget {
   AddTaskDialogPage({super.key});
+  final TaskController _taskController = Get.put(TaskController());
 
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
@@ -25,6 +27,18 @@ class AddTaskDialogPage extends GetWidget {
   List<String> repeatList = ['None', 'Daily', 'Weekly', 'Monthly'];
   final RxInt _selectedColor = 0.obs;
   List<Color> colorList = [bluishClr, pinkClr, orangeClr];
+  final RxString _selectedAssignee = 'None'.obs;
+  List<String> assigneeList = [
+    'None',
+    'Me',
+    'Lư Hoàng Duy',
+    'Nguyễn Tuấn Kiệt',
+    'Đồng Đức Mạnh',
+    'WINTER',
+    'Kim Jisoo',
+    'Kim Jenie',
+    'All'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -148,6 +162,33 @@ class AddTaskDialogPage extends GetWidget {
                 );
               }),
               Obx(() {
+                return InputField(
+                  title: 'Assignee',
+                  hint: _selectedAssignee.value,
+                  child: DropdownButton<String>(
+                    onChanged: (String? value) {
+                      _selectedAssignee.value = value!;
+                    },
+                    items: assigneeList
+                        .map<DropdownMenuItem<String>>(
+                          (e) => DropdownMenuItem<String>(
+                            value: e,
+                            child: Text(e),
+                          ),
+                        )
+                        .toList(),
+                    icon: const Icon(
+                      Icons.keyboard_arrow_down,
+                      size: 32,
+                      color: Colors.grey,
+                    ),
+                    elevation: 3,
+                    underline: Container(height: 0),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                );
+              }),
+              Obx(() {
                 return Container(
                   margin: const EdgeInsets.symmetric(
                       vertical: 10.0, horizontal: 10.0),
@@ -195,19 +236,7 @@ class AddTaskDialogPage extends GetWidget {
       floatingActionButton: MyButton(
           label: 'Create Task',
           onTap: () {
-            final task = Task(
-              id: null,
-              title: _titleController.text,
-              note: _noteController.text,
-              isCompleted: 0,
-              date: DateFormat.yMd().format(_selecteDate),
-              startTime: _startTime.value,
-              endTime: _endTime.value,
-              color: _selectedColor.value,
-              remind: _selectedRemind.value,
-              repeat: _selectedRepeat.value,
-            );
-            print('create success');
+            _validateDate();
           }),
     );
   }
@@ -234,30 +263,72 @@ class AddTaskDialogPage extends GetWidget {
     );
   }
 
+  _validateDate() {
+    if (_titleController.text.isNotEmpty && _noteController.text.isNotEmpty) {
+      print(1);
+      _addTaskToDb();
+      Get.back();
+    } else if (_titleController.text.isEmpty || _noteController.text.isEmpty) {
+      print(2);
+
+      Get.snackbar(
+        'Required',
+        'All fileds are required',
+        backgroundColor: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        colorText: pinkClr,
+        icon: const Icon(
+          Icons.warning_amber_rounded,
+          color: Colors.red,
+        ),
+      );
+    } else {
+      print('######## Error Here ! ########');
+    }
+  }
+
+  _addTaskToDb() {
+    _taskController.addTask(
+      task: Task(
+        id: null,
+        title: _titleController.text,
+        note: _noteController.text,
+        isCompleted: 0,
+        date: DateFormat.yMd().format(_selecteDate),
+        startTime: _startTime.value,
+        endTime: _endTime.value,
+        color: _selectedColor.value,
+        remind: _selectedRemind.value,
+        repeat: _selectedRepeat.value,
+        assignee: _selectedAssignee.value,
+      ),
+    );
+  }
+
   _getDateFromUser(context) async {
-    DateTime? _pickedDate = await showDatePicker(
+    DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: _selecteDate,
       firstDate: DateTime(2015),
       lastDate: DateTime(2030),
     );
-    if (_pickedDate != null) {
-      _selecteDate = _pickedDate;
+    if (pickedDate != null) {
+      _selecteDate = pickedDate;
     } else
       print('picked date empty !');
   }
 
   _getTimeFromUser({required bool isStartTime, context}) async {
-    TimeOfDay? _pickedTime = await showTimePicker(
+    TimeOfDay? pickedTime = await showTimePicker(
       initialTime: TimeOfDay.now(),
       context: context,
     );
-    if (_pickedTime != null) {
+    if (pickedTime != null) {
       if (isStartTime) {
-        _startTime.value = _pickedTime.format(context);
+        _startTime.value = pickedTime.format(context);
         print(_startTime);
       } else {
-        _endTime.value = _pickedTime.format(context);
+        _endTime.value = pickedTime.format(context);
         print(_endTime);
       }
     }
