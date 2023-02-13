@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:management_app/widgets/add_task_form.dart';
+import 'package:management_app/pages/add_task_form.dart';
 import 'package:management_app/widgets/member_list.dart';
 
 import '../widgets/task_list.dart';
