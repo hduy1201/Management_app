@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:management_app/controllers/task_controller.dart';
 import 'package:management_app/models/task.model.dart';
 import 'package:management_app/theme.dart';
 import 'package:management_app/widgets/button.dart';
@@ -10,23 +9,21 @@ import 'package:management_app/widgets/input_field.dart';
 class AddTaskDialogPage extends GetWidget {
   AddTaskDialogPage({super.key});
 
-  final TaskController _taskController = Get.put(TaskController());
-
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
 
   late DateTime _selecteDate = DateTime.now();
-  late RxString _startTime =
+  late final RxString _startTime =
       DateFormat('hh:mm a').format(DateTime.now()).toString().obs;
-  RxString _endTime = DateFormat('hh:mm a')
+  final RxString _endTime = DateFormat('hh:mm a')
       .format(DateTime.now().add(const Duration(minutes: 15)))
       .toString()
       .obs;
   final RxInt _selectedRemind = 5.obs;
   List<int> remindList = [5, 10, 15, 20];
-  RxString _selectedRepeat = 'None'.obs;
+  final RxString _selectedRepeat = 'None'.obs;
   List<String> repeatList = ['None', 'Daily', 'Weekly', 'Monthly'];
-  RxInt _selectedColor = 0.obs;
+  final RxInt _selectedColor = 0.obs;
   List<Color> colorList = [bluishClr, pinkClr, orangeClr];
 
   @override
@@ -198,7 +195,19 @@ class AddTaskDialogPage extends GetWidget {
       floatingActionButton: MyButton(
           label: 'Create Task',
           onTap: () {
-            _validateDate();
+            final task = Task(
+              id: null,
+              title: _titleController.text,
+              note: _noteController.text,
+              isCompleted: 0,
+              date: DateFormat.yMd().format(_selecteDate),
+              startTime: _startTime.value,
+              endTime: _endTime.value,
+              color: _selectedColor.value,
+              remind: _selectedRemind.value,
+              repeat: _selectedRepeat.value,
+            );
+            print('create success');
           }),
     );
   }
@@ -221,47 +230,6 @@ class AddTaskDialogPage extends GetWidget {
           Icons.arrow_back_ios,
           size: 24,
         ),
-      ),
-    );
-  }
-
-  _validateDate() {
-    if (_titleController.text.isNotEmpty && _noteController.text.isNotEmpty) {
-      print(1);
-      _addTaskToDb();
-      Get.back();
-    } else if (_titleController.text.isEmpty || _noteController.text.isEmpty) {
-      print(2);
-
-      Get.snackbar(
-        'Required',
-        'All fileds are required',
-        backgroundColor: Colors.white,
-        snackPosition: SnackPosition.BOTTOM,
-        colorText: pinkClr,
-        icon: const Icon(
-          Icons.warning_amber_rounded,
-          color: Colors.red,
-        ),
-      );
-    } else {
-      print('######## Error Here ! ########');
-    }
-  }
-
-  _addTaskToDb() {
-    _taskController.addTask(
-      task: Task(
-        id: null,
-        title: _titleController.text,
-        note: _noteController.text,
-        isCompleted: 0,
-        date: DateFormat.yMd().format(_selecteDate),
-        startTime: _startTime.value,
-        endTime: _endTime.value,
-        color: _selectedColor.value,
-        remind: _selectedRemind.value,
-        repeat: _selectedRepeat.value,
       ),
     );
   }
