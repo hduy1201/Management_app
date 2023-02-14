@@ -50,6 +50,7 @@ dependencies:
   flutter_staggered_animations:
   flutter_svg:
   rxdart: 
+  timezone:
 
 
 dev_dependencies:

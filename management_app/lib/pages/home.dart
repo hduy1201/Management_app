@@ -24,7 +24,12 @@ class HomeScreen extends GetView {
     return Scaffold(
       appBar: AppBar(
         title: Obx(
-          () => Center(child: Text(listIdToName(_selectedIndex.value))),
+          () => Center(
+              child: Text(listIdToName(_selectedIndex.value),
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                  ))),
         ),
         automaticallyImplyLeading: false,
       ),

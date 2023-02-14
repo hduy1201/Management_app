@@ -92,7 +92,7 @@ class GroupPage extends GetWidget {
             if (_selectedIndex.value == 0) {
               return const Expanded(child: MemberListWidget());
             } else if (_selectedIndex.value == 1) {
-              return const Expanded(child: TaskListWidget());
+              return Expanded(child: TaskListWidget());
             } else {
               return const Center(
                 child: Text('Home Page'),

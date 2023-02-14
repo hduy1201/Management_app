@@ -32,7 +32,7 @@ class ProfileScreen extends GetView {
                   decoration: const BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage(
-                        "assets/images/profile.png",
+                        "assets/images/jenie.jpg",
                       ),
                     ),
                   ),

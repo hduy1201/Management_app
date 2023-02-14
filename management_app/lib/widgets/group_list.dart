@@ -1,18 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:management_app/pages/group.dart';
+import 'package:management_app/widgets/add_group_dialog.dart';
 
 class GroupListWidget extends GetView {
   const GroupListWidget({super.key});
 
   Widget _buildList() {
     return Column(textDirection: TextDirection.ltr, children: <Widget>[
-      const Text('Groups you are in:',
-          textAlign: TextAlign.left,
-          style: TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 30,
-          )),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          const Text('Groups you are in:',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 30,
+              )),
+          //add button
+          IconButton(
+            onPressed: () => {Get.dialog(AddGroupDialogWidget())},
+            icon: const Icon(
+              Icons.add_circle,
+              color: Colors.blueGrey,
+            ),
+          ),
+        ],
+      ),
       Expanded(
         child: ListView(
           children: [

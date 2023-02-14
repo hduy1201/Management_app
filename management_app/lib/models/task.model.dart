@@ -12,6 +12,7 @@ class Task {
   int? color;
   int? remind;
   String? repeat;
+  String? assignee;
 
   Task({
     required this.id,
@@ -24,6 +25,7 @@ class Task {
     required this.color,
     required this.remind,
     required this.repeat,
+    required this.assignee,
   });
 
   Map<String, dynamic> toMap() {
@@ -38,6 +40,7 @@ class Task {
       'color': color,
       'remind': remind,
       'repeat': repeat,
+      'assignee': assignee,
     };
   }
 
@@ -52,5 +55,6 @@ class Task {
     color = json['color'];
     remind = json['remind'];
     repeat = json['repeat'];
+    assignee = json['assignee'];
   }
 }
